@@ -10,13 +10,15 @@ $(function(){
 
 function buscarPersonaje(){ 
     let personaje = $("#info_input").val()//captura info del input
-    alert("buscar personaje" + personaje)
+    // alert("buscar personaje" + personaje)
     //validar que info_input solo sera numeros
     if (validar(personaje)==false) {
         errorInput()
+        return
     }
    
     //buscar personajes
+    getPersonaje(personaje)
 }
 
 function validar(num){
@@ -29,6 +31,24 @@ function validar(num){
 }
 
 function errorInput(){
-    alert("Debe escribir un valor valido")
+    alert("Debe ingresar un valor nemerico")
     $("#info_input").focus()
 }
+
+function getPersonaje(id){
+    $.ajax({
+        type:"GET",
+        url:`https://superheroapi.com/api.php/10225987047762296/${id}`,
+        success:function(params){
+            console.log(params)
+        },
+        error:function(error){
+            console.log(error)
+        }
+
+    })
+}
+
+
+
+//https://superheroapi.com/api.php/10225987047762296/43
