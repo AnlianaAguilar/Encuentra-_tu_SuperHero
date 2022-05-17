@@ -12,7 +12,10 @@ function buscarPersonaje(){
     let personaje = $("#info_input").val()//captura info del input
     alert("buscar personaje" + personaje)
     //validar que info_input solo sera numeros
-    alert(validar(personaje))
+    if (validar(personaje)==false) {
+        errorInput()
+    }
+   
     //buscar personajes
 }
 
@@ -23,4 +26,9 @@ function validar(num){
     }else{
         return false
     }
+}
+
+function errorInput(){
+    alert("Debe escribir un valor valido")
+    $("#info_input").focus()
 }
