@@ -6,6 +6,11 @@ $(function () {
         buscarPersonaje()
     })
 
+    $("#button_limpiar").click(()=>{
+        // alert("boton limpiar")
+        limpiar()   
+    })
+
 })
 
 function buscarPersonaje() {
@@ -40,11 +45,13 @@ function getPersonaje(id) {
         type: "GET",
         url: `https://superheroapi.com/api.php/10225987047762296/${id}`,
         success: function (params) {
-            console.log(params)
+            // console.log(params)
             //generar un card
-            console.log(cards(params))
+            // console.log(cards(params))
             //mostrar en html
             $("#cards").append(cards(params))
+            $("#info_input").val("")
+            $("#info_input").focus()
         },
         error: function (error) {
             console.log(error)
@@ -71,11 +78,7 @@ function cards(superhero) {
                         <p class="card-text">Primera Aparición:<span class="fw-lighter"> ${superhero.biography["first-appearance"]}</span></p><hr/>
                         <p class="card-text">Altura:<span class="fw-lighter"> ${superhero.appearance.height[0]} - ${superhero.appearance.height[1]}</span> </p><hr/>
                         <p class="card-text">Peso:<span class="fw-lighter"> ${superhero.appearance.weight[0]} - ${superhero.appearance.weight[1]}</span></p><hr/>
-                        <p class="card-text">Alianzas:<span class="fw-lighter"> ${superhero.biography.aliases[0]}</span></p>
-                        
-
-
-                    
+                        <p class="card-text">Alianzas:<span class="fw-lighter"> ${superhero.biography.aliases[0]}</span></p>                  
                     </div>
                 </div>
             </div>
@@ -85,6 +88,7 @@ function cards(superhero) {
     return card
 }
 
-
-
-//https://superheroapi.com/api.php/10225987047762296/43
+function limpiar (){
+    $("#cards").empty()
+    $("#info_input").focus()
+}
