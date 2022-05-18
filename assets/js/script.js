@@ -55,7 +55,7 @@ function getPersonaje(id) {
 
 function cards(superhero) {
     let card = `
-    <div class="col-12 col-md-4">
+    <div class="col-12 col-md-4 col-lg-12">
         <div class="card mb-3" style="max-width: 540px;">
             <div class="row g-0">
                 <div class="col-md-4">
@@ -63,8 +63,19 @@ function cards(superhero) {
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h5 class="card-title">SuperHero Encontrado</h5>
-                        <p class="card-text">${superhero.name}</p>
+                        <h5 class="card-title fw-bold">SuperHero Encontrado</h5><hr/>
+                        <p class="card-text">Nombre:<span class="fw-lighter"> ${superhero.name}</span></p><hr/>
+                        <p class="card-text">Conexiones:<span class="fw-lighter"> ${superhero.connections["group-affiliation"]}</span></p><hr/>
+                        <p class="card-text">Publicado por:<span class="fw-lighter"> ${superhero.biography.publisher}</span></p><hr/>
+                        <p class="card-text">Ocupación:<span class="fw-lighter"> ${superhero.work.occupation}</span></p><hr/>
+                        <p class="card-text">Primera Aparición:<span class="fw-lighter"> ${superhero.biography["first-appearance"]}</span></p><hr/>
+                        <p class="card-text">Altura:<span class="fw-lighter"> ${superhero.appearance.height[0]} - ${superhero.appearance.height[1]}</span> </p><hr/>
+                        <p class="card-text">Peso:<span class="fw-lighter"> ${superhero.appearance.weight[0]} - ${superhero.appearance.weight[1]}</span></p><hr/>
+                        <p class="card-text">Alianzas:<span class="fw-lighter"> ${superhero.biography.aliases[0]}</span></p>
+                        
+
+
+                    
                     </div>
                 </div>
             </div>
