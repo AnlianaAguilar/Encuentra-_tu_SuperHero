@@ -1,4 +1,5 @@
 // document ready event
+let info_personajes_arr = []
 //capturar el evento boton
 $(function () {
     $("#button").click(() => {
@@ -49,9 +50,14 @@ function getPersonaje(id) {
             //generar un card
             // console.log(cards(params))
             //mostrar en html
-            $("#cards").append(cards(params))
+            $("#cards").html(cards(params)) // coloca uno nuevo no suma y borra el anterio
+            //input vacio
             $("#info_input").val("")
             $("#info_input").focus()
+            //generar grafico
+            limpiarGrafico()
+            infoGrafico(params)
+            grafico()
         },
         error: function (error) {
             console.log(error)
@@ -91,4 +97,48 @@ function cards(superhero) {
 function limpiar (){
     $("#cards").empty()
     $("#info_input").focus()
+}
+
+// 
+function grafico (){
+
+    var options = {
+        title: {
+            text: "Estadisticas de Poder"
+        },
+        subtitles: [{
+            text: "As of November, 2017"
+        }],
+        animationEnabled: true,
+        data: [{
+            type: "pie",
+            startAngle: 40,
+            toolTipContent: "<b>{label}</b>: {y}%",
+            showInLegend: "true",
+            legendText: "{label}",
+            indexLabelFontSize: 16,
+            indexLabel: "{label} - {y}%",
+            dataPoints: 
+                info_personajes_arr
+            
+        }]
+    };
+    $("#chartContainer").CanvasJSChart(options);
+}
+
+function infoGrafico (personaje){
+
+    Object.entries(personaje.powerstats).forEach(([key, value])=>{
+        let powerstatsPersonaje = {
+            label:key, 
+            y:value
+        }
+      info_personajes_arr.push(powerstatsPersonaje)  
+    })
+     
+    console.log(info_personajes_arr)
+}
+
+function limpiarGrafico (){
+    info_personajes_arr = [] 
 }
